@@ -5,4 +5,5 @@
 !/ranger
 !/zsh
 !/fontconfig
-!/nvim/init.vim
+!/nvim
+/nvim/.netrwhist

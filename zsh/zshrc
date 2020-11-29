@@ -1,8 +1,10 @@
 # alias
 alias ra='ranger'
-alias nzsh='nvim ~/.config/zsh/zshrc'
-alias nzim='nvim ~/.config/zsh/zimrc'
-alias vimrc='nvim ~/.vimrc'
+alias zshrc='nvim ~/.config/zsh/zshrc'
+alias zr='nvim ~/.config/zsh/zimrc'
+alias vr='nvim ~/.vimrc'
+alias vi='nvim'
+alias vim'nvim'
 
 
 # env 
@@ -30,9 +32,21 @@ proxy() {
 
 
 
-# fzf color theme
-export FZF_DEFAULT_OPTS=$FZF_DEFAULT_OPTS'
---color=dark
---color=fg:-1,bg:-1,hl:#5fff87,fg+:-1,bg+:-1,hl+:#ffaf5f
---color=info:#af87ff,prompt:#5fff87,pointer:#ff87d7,marker:#ff87d7,spinner:#ff87d7
-'
+# fzf config
+#export FZF_DEFAULT_OPTS=$FZF_DEFAULT_OPTS'
+#--color=dark
+#--color=fg:-1,bg:-1,hl:#5fff87,fg+:-1,bg+:-1,hl+:#ffaf5f
+#--color=info:#af87ff,prompt:#5fff87,pointer:#ff87d7,marker:#ff87d7,spinner:#ff87d7
+#'
+export FZF_COMPLETION_TRIGGER='\'
+export FZF_DEFAULT_COMMOND='fd -type file -H'
+# Install packages using yay (change to pacman/AUR helper of your choice)
+# function in() {
+#     yay -Slq | fzf -q "$1" -m --preview 'yay -Si {1}'| xargs -ro yay -S
+# }
+# Remove installed packages (change to pacman/AUR helper of your choice)
+# function re() {
+#     yay -Qq | fzf -q "$1" -m --preview 'yay -Qi {1}' | xargs -ro yay -Rns
+# }
+# zstyle ':fzf-tab:complete:
+# zstyle ':fzf-tab:*' fzf-command ftb-tmux-popup
