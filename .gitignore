@@ -1,9 +1,8 @@
 /*
 /*/
 
-
+!.gitignore
 !/ranger
 !/zsh
-!/fontconfig
 !/nvim
 /nvim/.netrwhist
