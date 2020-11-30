@@ -3,8 +3,13 @@
 
 !/ssh
 !/.gitignore
-!/ranger
+
+!/ranger/*.py
+!/ranger/*.conf
+!/ranger/*.sh
+
 !/zsh
 !/fontconfig
 !/nvim
 /nvim/.netrwhist
+
