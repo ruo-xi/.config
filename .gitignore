@@ -1,6 +1,7 @@
 /*
 /*/
 
+!/ssh
 !/.gitignore
 !/ranger
 !/zsh
