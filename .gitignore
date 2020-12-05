@@ -8,6 +8,8 @@
 !/ranger/*.conf
 !/ranger/*.sh
 
+!/rofi
+
 !/zsh
 !/fontconfig
 !/nvim
