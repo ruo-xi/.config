@@ -36,9 +36,10 @@ let &t_ut=''
 " ===
 " === Editor behavior
 " ===
-" high light
-syntax on   
+" set highlight
+" syntax on   
 " line number
+"for markdown
 set number  
 set relativenumber 
 					
@@ -67,7 +68,9 @@ set scrolloff=5
 set tabstop=2
 set shiftwidth=2
 set autoindent
+set nocompatible
 
+filetype plugin on
 
 " ===
 " === KeyBoard
@@ -86,6 +89,8 @@ map Q :q<CR>
 map R :source $MYVIMRC<CR>
 map <C-TAB> :bnext<CR>
 map <C-S-TAB> :bprevious<CR>
+map <C-j> : <C-e>
+map <C-k> : <C-y>
 " noremap ; :
 
 
@@ -112,10 +117,11 @@ Plug 'mhinz/vim-startify'
 
 " highlight
 " Plug 'nvim-treesitter/nvim-treesitter'
+" Plug 'sheerun/vim-polyglot'
 
 " auto completion
-Plug 'jiangmiao/auto-pairs'
-Plug 'neoclide/coc.nvim'
+" Plug 'jiangmiao/auto-pairs'
+" Plug 'neoclide/coc.nvim'
 
 "fuzzy finder 
 Plug 'junegunn/fzf.vim'
@@ -128,18 +134,18 @@ Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 
 " color theme
-" Plug 'morhetz/gruvbox'
+ Plug 'morhetz/gruvbox'
 Plug 'connorholyday/vim-snazzy'
 
 " align
-Plug 'junegunn/vim-easy-align'
+" Plug 'junegunn/vim-easy-align'
 
 " tags
-Plug 'majutsushi/tagbar'
-Plug 'liuchengxu/vista.vim'
+" Plug 'majutsushi/tagbar'
+" Plug 'liuchengxu/vista.vim'
 
 "float term
-Plug 'voldikss/vim-floaterm'
+" Plug 'voldikss/vim-floaterm'
 
 " for language
 
@@ -147,18 +153,29 @@ Plug 'voldikss/vim-floaterm'
 " Plug 'artur-shaik/vim-javacomplete2'
 
 " golang 
-Plug 'fatih/vim-go' , { 'for': ['go', 'vim-plug'], 'tag': '*', 'do': ':GoUpdateBinaries'}
-Plug 'dgryski/vim-godef'
+" Plug 'fatih/vim-go' , { 'for': ['go', 'vim-plug'], 'tag': '*', 'do': ':GoUpdateBinaries'}
+" Plug 'dgryski/vim-godef'
 
 " markdown
 " Plug 'plasticboy/vim-markdown' ,{'for': ['markdown']}
-" Plug 'dhruvasagar/vim-table-mode', { 'on': 'TableModeToggle', 'for': ['text', 'markdown', 'vim-plug'] }
-" Plug 'mzlogin/vim-markdown-toc' ,{'for': ['markdown']}
-" Plug 'dkarter/bullets.vim' ,{'for': ['markdown']}
+Plug 'suan/vim-instant-markdown', {'for': 'markdown'}
+Plug 'dhruvasagar/vim-table-mode', { 'on': 'TableModeToggle', 'for': ['text', 'markdown', 'vim-plug'] }
+Plug 'mzlogin/vim-markdown-toc' ,{'for': ['markdown']}
+Plug 'dkarter/bullets.vim' ,{'for': ['markdown']}
 
 call plug#end()
 " source theme file
 source ~/.config/nvim/theme.vim
+
+" vim-instant-markdowm
+let g:instant_markdown_slow = 0
+let g:instant_markdown_autostart = 0 
+" let g:instant_markdown_open_to_the_world = 1
+" let g:instant_markdown_allow_unsafe_content = 1
+" let g:instant_markdown_allow_external_content = 0
+" let g:instant_markdown_mathjax = 1
+let g:instant_markdown_autoscroll = 0
+let g:instant_markdown_browser = "chromium --new-window"
 
 " bullets 
 let g:bullets_enabled_file_types = [
@@ -167,9 +184,19 @@ let g:bullets_enabled_file_types = [
     \ 'gitcommit',
     \ 'scratch'
     \]
+let g:bullets_enable_in_empty_buffers = 0
 
 " vim-rooter
 let g:rooter_target = '*.c,*.h,*.cpp,*.hpp,*.java,*.go'
 let g:rooter_parterns = ['.git','MAKEFILE','go.mod','build.gradle']
 " nerdtree
 " autocmd vimenter * NERDTree
+
+
+
+
+" rnvim 
+map <C-E> : RnvimrToggle<CR>
+let g:rnvimr_enable_ex = 1
+let g:rnvimr_enable_picker = 1
+let g:rnvimr_hide_gitignore = -1

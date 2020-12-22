@@ -11,6 +11,8 @@ let g:airline_theme = 'onedark'
 " We don't need to see things like -- INSERT -- anymore
 set noshowmode
 
+" set background=dark
+" colorscheme gruvbox
 
 let g:SnazzyTransparent = 1
 let g:lightline = {

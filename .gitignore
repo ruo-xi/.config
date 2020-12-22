@@ -11,7 +11,12 @@
 !/rofi
 
 !/zsh
-!/fontconfig
-!/nvim
-/nvim/.netrwhist
 
+!/fontconfig
+!/nvim/*.vim
+!/nvim/coc-settings.json
+
+!/picom
+
+!/fcitx5
+!/JetBrains/IntelliJIdea2020.3/keymaps

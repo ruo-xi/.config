@@ -2,7 +2,7 @@
 alias ra='ranger'
 alias zshrc='nvim ~/.config/zsh/zshrc'
 alias zr='nvim ~/.config/zsh/zimrc'
-alias vr='nvim ~/.vimrc'
+alias vr='nvim ~/.config/nvim/init.vim'
 alias vi='nvim'
 alias vim'nvim'
 
@@ -11,7 +11,7 @@ alias vim'nvim'
 export XDG_CONFIG_HOME=$HOME/.config
 export GOPATH=$HOME/go
 export EDITOR=nvim
-export PATH=$PATH:.local/bin
+export PATH=$PATH:~/.local/bin:~/.gem/ruby/2.7.0/bin
 
 export PLUG_DIR=$HOME/.zim
 
