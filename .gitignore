@@ -13,8 +13,8 @@
 !/zsh
 
 !/fontconfig
-!/nvim/*.vim
-!/nvim/coc-settings.json
+!/nvim/
+/nvim/autoload
 
 !/picom
 

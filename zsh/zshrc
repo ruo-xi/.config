@@ -30,6 +30,8 @@ proxy() {
 	export https_proxy="127.0.0.1:8888"
 }
 
+# z
+source ~/.config/z/z.sh
 
 
 # fzf config

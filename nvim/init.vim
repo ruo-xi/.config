@@ -66,12 +66,11 @@ set scrolloff=5
 " set clipboard=unnamedplus               " Copy paste between vim and everything else
 " indent 
 set tabstop=2
-set shiftwidth=2
+" set shiftwidth=2
 set autoindent
 set nocompatible
 
 filetype plugin on
-
 " ===
 " === KeyBoard
 " ===
@@ -83,16 +82,12 @@ map P "+p
 map J 5j
 " map K 5k
 
-map s <nop>
-map S :w<CR>
-map Q :q<CR>
-map R :source $MYVIMRC<CR>
-map <C-TAB> :bnext<CR>
-map <C-S-TAB> :bprevious<CR>
-map <C-j> : <C-e>
-map <C-k> : <C-y>
-" noremap ; :
-
+nnoremap s <nop>
+nnoremap S :w<CR>
+nnoremap Q :q<CR>
+nnoremap R :source $MYVIMRC<CR>
+nnoremap <C-TAB> :bnext<CR>
+nnoremap <C-S-TAB> :bprevious<CR>
 
 " ===
 " === Install Plugins with Vim-Plug
@@ -104,28 +99,23 @@ call plug#begin('~/.vim/plugged')
 Plug 'airblade/vim-rooter'
 
 " work dir tree
-" Plug 'preservim/nerdtree'
-" Plug 'jistr/vim-nerdtree-tabs'
-" Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'kevinhwang91/rnvimr'
-
-" manage key On-demand lazy load
-" Plug 'liuchengxu/vim-which-key', { 'on': ['WhichKey', 'WhichKey!'] }
 
 " provides a start screen  
 Plug 'mhinz/vim-startify'
-
+" visiable 	indent
+Plug 'Yggdroot/indentLine'
 " highlight
-" Plug 'nvim-treesitter/nvim-treesitter'
+Plug 'nvim-treesitter/nvim-treesitter'
 " Plug 'sheerun/vim-polyglot'
 
 " auto completion
 " Plug 'jiangmiao/auto-pairs'
-" Plug 'neoclide/coc.nvim'
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
-"fuzzy finder 
-Plug 'junegunn/fzf.vim'
-Plug 'junegunn/fzf'
+" fuzzy finder 
+" Plug 'junegunn/fzf.vim'
+" Plug 'junegunn/fzf'
 " Plug 'Yggdroot/LeaderF', { 'do': ':LeaderfInstallCExtension' }
 
 " Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
@@ -135,7 +125,7 @@ Plug 'vim-airline/vim-airline-themes'
 
 " color theme
  Plug 'morhetz/gruvbox'
-Plug 'connorholyday/vim-snazzy'
+ Plug 'connorholyday/vim-snazzy'
 
 " align
 " Plug 'junegunn/vim-easy-align'
@@ -157,43 +147,65 @@ Plug 'connorholyday/vim-snazzy'
 " Plug 'dgryski/vim-godef'
 
 " markdown
-" Plug 'plasticboy/vim-markdown' ,{'for': ['markdown']}
-Plug 'suan/vim-instant-markdown', {'for': 'markdown'}
-Plug 'dhruvasagar/vim-table-mode', { 'on': 'TableModeToggle', 'for': ['text', 'markdown', 'vim-plug'] }
-Plug 'mzlogin/vim-markdown-toc' ,{'for': ['markdown']}
-Plug 'dkarter/bullets.vim' ,{'for': ['markdown']}
+Plug 'godlygeek/tabular'
+Plug 'plasticboy/vim-markdown' ,{'for': ['markdown']}
+Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install'  }
+
+" Plug 'suan/vim-instant-markdown', {'for': 'markdown'}
+" Plug 'dhruvasagar/vim-table-mode', { 'on': 'TableModeToggle', 'for': ['text', 'markdown', 'vim-plug'] }
+" Plug 'mzlogin/vim-markdown-toc' ,{'for': ['markdown']}
+" Plug 'dkarter/bullets.vim' ,{'for': ['markdown']}
 
 call plug#end()
+
+let g:mkdp_auto_start = 0
+let g:mkdp_auto_close = 1
+let g:mkdp_refresh_slow = 0
+" let g:mkdp_browser = 'chromium --new-window'
+let g:mkdp_browserfunc = 'g:Open_browser'
+let g:mkdp_preview_options = {
+    \ 'mkit': {},
+    \ 'katex': {},
+    \ 'uml': {},
+    \ 'maid': {},
+    \ 'disable_sync_scroll': 0,
+    \ 'sync_scroll_type': 'middle',
+    \ 'hide_yaml_meta': 1,
+    \ 'sequence_diagrams': {},
+    \ 'flowchart_diagrams': {},
+    \ 'content_editable': v:false,
+    \ 'disable_filename': 0
+    \ }
+
+let g:mkdp_filetypes = ['markdown']
+function! g:Open_browser(url)
+				silent exec "chromium --new-window" . a:url . "&"
+endfunction
+
+" source markdown 
+source ~/.config/nvim/markdown.vim
 " source theme file
 source ~/.config/nvim/theme.vim
+" source coc plugin
+source ~/.config/nvim/coc.vim
+" coc.vim
+let g:coc_global_extensions = [
+	\	'coc-json',
+	\	'coc-lists',
+	\	'coc-explorer',
+	\	'coc-snippets',
+  \ 'coc-pairs']
 
-" vim-instant-markdowm
-let g:instant_markdown_slow = 0
-let g:instant_markdown_autostart = 0 
-" let g:instant_markdown_open_to_the_world = 1
-" let g:instant_markdown_allow_unsafe_content = 1
-" let g:instant_markdown_allow_external_content = 0
-" let g:instant_markdown_mathjax = 1
-let g:instant_markdown_autoscroll = 0
-let g:instant_markdown_browser = "chromium --new-window"
+" ======
+" ====== config plugin
+" ======
 
-" bullets 
-let g:bullets_enabled_file_types = [
-    \ 'markdown',
-    \ 'text',
-    \ 'gitcommit',
-    \ 'scratch'
-    \]
-let g:bullets_enable_in_empty_buffers = 0
-
+" indentline
+let g:indentLine_char_list = ['|', '¦', '┆', '┊']
+let g:indentLine_enabled = 1
 " vim-rooter
 let g:rooter_target = '*.c,*.h,*.cpp,*.hpp,*.java,*.go'
 let g:rooter_parterns = ['.git','MAKEFILE','go.mod','build.gradle']
-" nerdtree
-" autocmd vimenter * NERDTree
-
-
-
 
 " rnvim 
 map <C-E> : RnvimrToggle<CR>
