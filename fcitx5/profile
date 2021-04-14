@@ -1,29 +1,23 @@
 [Groups/0]
 # Group Name
-Name=Default
+Name=default
 # Layout
 Default Layout=us
 # Default Input Method
-DefaultIM=keyboard-us-colemak
+DefaultIM=keyboard-us
 
 [Groups/0/Items/0]
 # Name
-Name=keyboard-us
+Name=rime
 # Layout
 Layout=
 
 [Groups/0/Items/1]
 # Name
-Name=keyboard-us-colemak
-# Layout
-Layout=
-
-[Groups/0/Items/2]
-# Name
-Name=pinyin
+Name=keyboard-us
 # Layout
 Layout=
 
 [GroupOrder]
-0=Default
+0=default
 

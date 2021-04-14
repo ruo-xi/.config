@@ -22,4 +22,6 @@ function! g:Open_browser(url)
 				silent exec "silent !chromium --new-window " . a:url . " &"
 endfunction
 
+" vim-markdown 
+let g:vim_markdown_folding_disabled = 1
 

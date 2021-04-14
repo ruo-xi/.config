@@ -1,28 +1,22 @@
 {
-	"languageserver": {
-		"ccls": {
-			"command": "ccls",
-			"filetypes": [
-				"c",
-				"cpp",
-				"objc",
-				"objcpp"
-			],
-			"rootPatterns": [
-				".ccls",
-				"compile_commands.json",
-				".git/",
-				".hg/",
-				".gitnore"
-			],
-			"initializationOptions": {
-				"cache": {
-					"directory": ".ccls-cache"
-				},
-				"client": {
-					"snippetSupport": true
-				}
-			}
-		}
-	}
+    "languageserver": {
+        "clangd": {
+            "command": "clangd",
+            "rootPatterns": [
+                "compile_flags.txt",
+                "compile_commands.json"
+            ],
+            "filetypes": [
+                "c",
+                "cc",
+                "cpp",
+                "c++",
+                "objc",
+                "objcpp"
+            ]
+        }
+    },
+    "coc.preferences.colorSupport": true,
+    "explorer.icon.enableNerdfont": true
 }
+

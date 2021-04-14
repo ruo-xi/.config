@@ -1,5 +1,4 @@
 " __  ____   __  _   ___     _____ __  __ ____   ____
-"|  \/  \ \ / / | \ | \ \   / /_ _|  \/  |  _ \ / ___|
 "| |\/| |\ V /  |  \| |\ \ / / | || |\/| | |_) | |
 "| |  | | | |   | |\  | \ V /  | || |  | |  _ <| |___
 "|_|  |_| |_|   |_| \_|  \_/  |___|_|  |_|_| \_\\____|
@@ -65,12 +64,18 @@ set scrolloff=5
 " clipboard
 " set clipboard=unnamedplus               " Copy paste between vim and everything else
 " indent 
-set tabstop=2
-" set shiftwidth=2
-set autoindent
-set nocompatible
 
-filetype plugin on
+set tabstop=4
+set shiftwidth=4
+set autoindent
+set smartindent
+set nocompatible
+set expandtab
+
+au! BufNewFile,BufReadPost *.{yaml,yml} set filetype=yaml " foldmethod=indent
+au! FileType yaml setlocal ts=2 sts=2 sw=2 
+au! FileType go setlocal noexpandtab 
+
 " ===
 " === KeyBoard
 " ===
@@ -78,19 +83,40 @@ let g:mapleader="\<Space>"
 map Y "+y
 map D "+d
 map P "+p
-
-map J 5j
-" map K 5k
-
+ 
+map <C-j> 5j
+map <C-k> 5k
 nnoremap s <nop>
 nnoremap S :w<CR>
 nnoremap Q :q<CR>
 nnoremap R :source $MYVIMRC<CR>
-nnoremap <C-TAB> :bnext<CR>
-nnoremap <C-S-TAB> :bprevious<CR>
+
+nnoremap <C-TAB> :tabnext<CR>
+nnoremap <C-S-TAB> :tabprevious<CR>
+
+
+" easy align
+vnoremap ga :EasyAlign<CR>
+" expand region
+vnoremap <leader>v <Plug>(expand_region_expand)
+vnoremap <leader>V <Plug>(expand_region_shrink)
+
+" search
+nnoremap n nzz
+nnoremap N Nzz
+nnoremap <leader>nh :nohlsearch<CR>
 
 " ===
-" === Install Plugins with Vim-Plug
+" === user-defined command
+" ===
+:command! CopyBuffer let @+ = expand('%')
+
+" %a %I:%M %p
+nmap <F3> i<C-R>=strftime("%Y-%m-%d")<CR><Esc>
+imap <F3> <C-R>=strftime("%Y-%m-%d")<CR>
+
+" ===
+" === Vim-Plug
 " ===
 
 call plug#begin('~/.vim/plugged')
@@ -98,15 +124,23 @@ call plug#begin('~/.vim/plugged')
 " find and cd work dir
 Plug 'airblade/vim-rooter'
 
+" bookmark
+Plug 'MattesGroeger/vim-bookmarks'
+
 " work dir tree
 Plug 'kevinhwang91/rnvimr'
 
 " provides a start screen  
 Plug 'mhinz/vim-startify'
+
 " visiable 	indent
 Plug 'Yggdroot/indentLine'
+
+" expand
+Plug 'terryma/vim-expand-region'
+
 " highlight
-Plug 'nvim-treesitter/nvim-treesitter'
+" Plug 'nvim-treesitter/nvim-treesitter' , {'do': ':TSUpdate'}
 " Plug 'sheerun/vim-polyglot'
 
 " auto completion
@@ -119,16 +153,18 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 " Plug 'Yggdroot/LeaderF', { 'do': ':LeaderfInstallCExtension' }
 
 " Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+
 " airline
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 
 " color theme
- Plug 'morhetz/gruvbox'
- Plug 'connorholyday/vim-snazzy'
+Plug 'morhetz/gruvbox'
+Plug 'connorholyday/vim-snazzy'
+" Plug 'sainnhe/sonokai'
 
 " align
-" Plug 'junegunn/vim-easy-align'
+Plug 'junegunn/vim-easy-align'
 
 " tags
 " Plug 'majutsushi/tagbar'
@@ -147,54 +183,36 @@ Plug 'vim-airline/vim-airline-themes'
 " Plug 'dgryski/vim-godef'
 
 " markdown
-Plug 'godlygeek/tabular'
-Plug 'plasticboy/vim-markdown' ,{'for': ['markdown']}
-Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install'  }
+" Plug 'godlygeek/tabular'
+" Plug 'plasticboy/vim-markdown' ,{'for': ['markdown']}
+" Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install'  }
 
 " Plug 'suan/vim-instant-markdown', {'for': 'markdown'}
 " Plug 'dhruvasagar/vim-table-mode', { 'on': 'TableModeToggle', 'for': ['text', 'markdown', 'vim-plug'] }
 " Plug 'mzlogin/vim-markdown-toc' ,{'for': ['markdown']}
 " Plug 'dkarter/bullets.vim' ,{'for': ['markdown']}
 
+Plug 'vimwiki/vimwiki'
 call plug#end()
 
-let g:mkdp_auto_start = 0
-let g:mkdp_auto_close = 1
-let g:mkdp_refresh_slow = 0
-" let g:mkdp_browser = 'chromium --new-window'
-let g:mkdp_browserfunc = 'g:Open_browser'
-let g:mkdp_preview_options = {
-    \ 'mkit': {},
-    \ 'katex': {},
-    \ 'uml': {},
-    \ 'maid': {},
-    \ 'disable_sync_scroll': 0,
-    \ 'sync_scroll_type': 'middle',
-    \ 'hide_yaml_meta': 1,
-    \ 'sequence_diagrams': {},
-    \ 'flowchart_diagrams': {},
-    \ 'content_editable': v:false,
-    \ 'disable_filename': 0
-    \ }
-
-let g:mkdp_filetypes = ['markdown']
-function! g:Open_browser(url)
-				silent exec "chromium --new-window" . a:url . "&"
-endfunction
 
 " source markdown 
-source ~/.config/nvim/markdown.vim
+" source ~/.config/nvim/markdown.vim
 " source theme file
 source ~/.config/nvim/theme.vim
 " source coc plugin
 source ~/.config/nvim/coc.vim
 " coc.vim
 let g:coc_global_extensions = [
-	\	'coc-json',
-	\	'coc-lists',
-	\	'coc-explorer',
-	\	'coc-snippets',
-  \ 'coc-pairs']
+	\'coc-json',
+	\'coc-lists',
+	\'coc-explorer',
+	\'coc-snippets',
+    \'coc-pairs',
+    \'coc-highlight',
+    \'coc-go',]
+"    \'coc-bookmark']
+"    \'coc-java']
 
 " ======
 " ====== config plugin
@@ -203,12 +221,28 @@ let g:coc_global_extensions = [
 " indentline
 let g:indentLine_char_list = ['|', '¦', '┆', '┊']
 let g:indentLine_enabled = 1
+
 " vim-rooter
-let g:rooter_target = '*.c,*.h,*.cpp,*.hpp,*.java,*.go'
-let g:rooter_parterns = ['.git','MAKEFILE','go.mod','build.gradle']
+let g:rooter_target = '*'
+let g:rooter_parterns = ['.git']
 
 " rnvim 
-map <C-E> : RnvimrToggle<CR>
+map <leader>e : RnvimrToggle<CR>
 let g:rnvimr_enable_ex = 1
 let g:rnvimr_enable_picker = 1
 let g:rnvimr_hide_gitignore = -1
+let g:rnvimr_action = {
+                \ '<C-t>': 'NvimEdit tabedit',
+                \ '<C-x>': 'NvimEdit split',
+                \ '<C-v>': 'NvimEdit vsplit',
+                \ 'Tab': 'NvimEdit tabnew',
+                \ 'gw': 'JumpNvimCwd',
+                \ 'yw': 'EmitRangerCwd'
+                \ }
+
+" vim-bookmarks
+let g:bookmark_save_per_working_dir = 1
+let g:bookmark_auto_save = 1
+let g:bookmark_auto_close = 1
+" let g:bookmark_center = 1
+" let g:bookmark_location_list = 1

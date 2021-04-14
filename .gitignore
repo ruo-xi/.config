@@ -4,6 +4,8 @@
 !/ssh
 !/.gitignore
 
+!/alacritty
+
 !/ranger/*.py
 !/ranger/*.conf
 !/ranger/*.sh
