@@ -31,7 +31,7 @@ proxy() {
 }
 
 # z
-source ~/.config/z/z.sh
+# source ~/.config/z/z.sh
 
 
 # fzf config
