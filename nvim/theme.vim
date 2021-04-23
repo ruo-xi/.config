@@ -1,5 +1,13 @@
+""" 
+"""  colorscheme
+""" 
+
+" set termguicolors
+" colorscheme gruvbox
+colorscheme dracula
+
 " Always show tabs
-set showtabline=2
+" set showtabline=2
 
 " enable tabline
 " let g:airline_section_b = 
@@ -9,12 +17,10 @@ set showtabline=2
 " let g:airline#extensions#tabline#right_sep = ''
 " let g:airline#extensions#tabline#right_alt_sep = ''
 " Switch to your current theme
-let g:airline_theme = 'gruvbox'
+" let g:airline_theme = 'gruvbox'
+let g:airline_theme = 'dracula'
 " We don't need to see things like -- INSERT -- anymore
 set noshowmode
-
-set termguicolors
-colorscheme gruvbox
 
 autocmd CursorHold * silent call CocActionAsync('highlight')
 

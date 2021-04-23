@@ -1,12 +1,11 @@
 # alias
 alias ra='ranger'
-alias zshrc='nvim ~/.config/zsh/zshrc'
-alias zr='nvim ~/.config/zsh/zimrc'
 alias vr='nvim ~/.config/nvim/init.vim'
 alias vi='nvim'
 alias vim'nvim'
-alias dr=docker
-
+alias dr='docker'
+alias uh='pactl set-default-sink alsa_output.pci-0000_01_00.1.hdmi-stereo-extra1'
+alias cbg='feh --bg-scale -z ~/Store/picture/wallpaper'
 
 # env 
 export XDG_CONFIG_HOME=$HOME/.config
@@ -29,6 +28,10 @@ proxy() {
 	export http_proxy="127.0.0.1:8888"
 	export https_proxy="127.0.0.1:8888"
 }
+unproxy() {
+	export http_proxy=""
+	export https_proxy=""
+}
 
 # z
 # source ~/.config/z/z.sh
@@ -41,7 +44,7 @@ FZF_TAB_GROUP_COLORS=(
     $'\033[38;5;214m' $'\033[38;5;165m' $'\033[38;5;124m' $'\033[38;5;120m'
 )
 zstyle ':fzf-tab:*' group-colors $FZF_TAB_GROUP_COLORS
-# zstyle ':fzf-tab:*' switch-group ',' '.'
+zstyle ':fzf-tab:*' switch-group ',' '.'
 # export FZF_DEFAULT_OPTS=$FZF_DEFAULT_OPTS'
 # --color=dark
 # --color=fg:-1,bg:-1,hl:#5fff87,fg+:-1,bg+:-1,hl+:#ffaf5f
